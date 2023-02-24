@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ author_name }}: {{ category }}{% endblock %}
+
+{% block page_header %}
+    <a href = "{% url 'home_page' %}">
+        <img src="{% static 'img/avatar.jpg' %}" />
+        <span class="author-name">{{ author_name }}</span>
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-16">
+            <div class="article-list">
+                <h1>Категория: {{ category }}</h1>
+                    {% for article in articles %}
+                        <div class="article">
+                            <h2 class="article-title">
+                                <a href="{{ article.get_absolute_url }}"></a>
+                            </h2>
+                        <div class="article-text">{{ article.summary }}</div>
+                            <div class="article-footer">
+                                <a href="{{ article.get_category_url }}"></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
